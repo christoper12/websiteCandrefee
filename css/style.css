@@ -1,0 +1,55 @@
+/* Fade-in animation */
+.fade-in { opacity: 0; animation: fadeIn 0.8s forwards; }
+@keyframes fadeIn { to { opacity: 1; } }
+
+/* Slide-up animation */
+.slide-up { transform: translateY(20px); opacity: 0; animation: slideUp 0.7s forwards; }
+@keyframes slideUp { to { transform: translateY(0); opacity: 1; } }
+
+body {
+    background: #f5f5f5;
+    /* padding: 20px; */
+}
+
+.card {
+    border-radius: 14px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+}
+
+.midnight-bg { background-color: #0a1a2f !important; }
+.midnight-text { color: #e2e8f0 !important; }
+.midnight-card { background-color: #11253f !important; color: #e2e8f0 !important; }
+
+.red{
+    color:red;
+    font-weight:bold;
+}
+
+@media (max-width: 576px) {
+    .header-logo { height: 35px !important; }
+}
+
+:root{
+    --card-radius:14px
+}
+    
+.rating-row .form-range{
+    height:8px
+}
+
+.cand-control {
+    background-color:#f0f0f0; 
+    color:#000;
+}
+    
+.fade-in{
+    opacity:0;animation:fadeIn .6s forwards
+}
+    
+@keyframes fadeIn{
+    to{opacity:1}
+}
+    
+@media(
+    min-width:992px){.container{max-width:980px}
+}
