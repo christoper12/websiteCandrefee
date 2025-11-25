@@ -80,127 +80,140 @@
 
                     <!-- Ratings: use range input + numeric display -->
                     <div class="row g-3 rating-row">
+
+                        <!-- FOLLOW INSTRUCTIONS -->
                         <div class="col-12 col-lg-12">
                             <label class="form-label">How well did the candidate follow instructions?</label>
-                            <div class="d-flex align-items-center gap-3">
-                                <!-- Left label -->
-                                <span style="width:70px; text-align:right; font-size:0.85rem;">Terrible</span>
+                            <div class="range-value-display" id="val_follow">1</div>
 
-                                <!-- Slider + value -->
-                                <div class="flex-grow-1 d-flex align-items-center gap-2">
-                                    <input type="range" min="1" max="10" value="5"
-                                        class="form-range"
-                                        name="q_follow_instructions"
-                                        oninput="syncRange(this)">
-                                    <output class="range-value">5</output>
+                            <div class="range-wrapper">
+                                <input type="range" min="1" max="10" value="1"
+                                    name="q_follow_instructions"
+                                    oninput="syncRangeValue(this, 'val_follow')">
+
+                                <div class="range-ticks">
+                                    <span></span><span></span><span></span><span></span><span></span>
+                                    <span></span><span></span><span></span><span></span><span></span>
                                 </div>
 
-                                <!-- Right label -->
-                                <span style="width:70px; font-size:0.85rem;">Amazing</span>
+                                <div class="range-labels light">
+                                    <span>Poor (1)</span>
+                                    <span>(10) Excellent</span>
+                                </div>
                             </div>
                         </div>
 
+                        <!-- WORK INDEPENDENTLY -->
                         <div class="col-12 col-lg-12">
                             <label class="form-label">How well did the candidate work independently?</label>
-                            <div class="d-flex align-items-center gap-3">
-                                <!-- Left label -->
-                                <span style="width:70px; text-align:right; font-size:0.85rem;">Terrible</span>
+                            <div class="range-value-display" id="val_independent">1</div>
 
-                                <!-- Slider + value -->
-                                <div class="flex-grow-1 d-flex align-items-center gap-2">
-                                    <input type="range" min="1" max="10" value="5"
-                                        class="form-range"
-                                        name="q_work_independently"
-                                        oninput="syncRange(this)">
-                                    <output class="range-value">5</output>
+                            <div class="range-wrapper">
+                                <input type="range" min="1" max="10" value="1"
+                                    name="q_work_independently"
+                                    oninput="syncRangeValue(this, 'val_independent')">
+
+                                <div class="range-ticks">
+                                    <span></span><span></span><span></span><span></span><span></span>
+                                    <span></span><span></span><span></span><span></span><span></span>
                                 </div>
 
-                                <!-- Right label -->
-                                <span style="width:70px; font-size:0.85rem;">Amazing</span>
+                                <div class="range-labels light">
+                                    <span>Poor (1)</span>
+                                    <span>(10) Excellent</span>
+                                </div>
                             </div>
                         </div>
 
+                        <!-- ACCURACY -->
                         <div class="col-12 col-lg-12">
                             <label class="form-label">How accurate was the candidate's work, and how often did mistakes occur?</label>
-                            <div class="d-flex align-items-center gap-3">
-                                <!-- Left label -->
-                                <span style="width:70px; text-align:right; font-size:0.85rem;">Terrible</span>
+                            <div class="range-value-display" id="val_accuracy">1</div>
 
-                                <!-- Slider + value -->
-                                <div class="flex-grow-1 d-flex align-items-center gap-2">
-                                    <input type="range" min="1" max="10" value="5"
-                                        class="form-range"
-                                        name="q_accuracy"
-                                        oninput="syncRange(this)">
-                                    <output class="range-value">5</output>
+                            <div class="range-wrapper">
+                                <input type="range" min="1" max="10" value="1"
+                                    name="q_accuracy"
+                                    oninput="syncRangeValue(this, 'val_accuracy')">
+
+                                <div class="range-ticks">
+                                    <span></span><span></span><span></span><span></span><span></span>
+                                    <span></span><span></span><span></span><span></span><span></span>
                                 </div>
 
-                                <!-- Right label -->
-                                <span style="width:70px; font-size:0.85rem;">Amazing</span>
+                                <div class="range-labels light">
+                                    <span>Poor (1)</span>
+                                    <span>(10) Excellent</span>
+                                </div>
                             </div>
                         </div>
 
+                        <!-- ATTITUDE -->
                         <div class="col-12 col-lg-12">
                             <label class="form-label">How was the candidate's attitude toward yourself and their coworkers?</label>
-                            <div class="d-flex align-items-center gap-3">
-                                <!-- Left label -->
-                                <span style="width:70px; text-align:right; font-size:0.85rem;">Terrible</span>
+                            <div class="range-value-display" id="val_attitude">1</div>
 
-                                <!-- Slider + value -->
-                                <div class="flex-grow-1 d-flex align-items-center gap-2">
-                                    <input type="range" min="1" max="10" value="5"
-                                        class="form-range"
-                                        name="q_attitude"
-                                        oninput="syncRange(this)">
-                                    <output class="range-value">5</output>
+                            <div class="range-wrapper">
+                                <input type="range" min="1" max="10" value="1"
+                                    name="q_attitude"
+                                    oninput="syncRangeValue(this, 'val_attitude')">
+
+                                <div class="range-ticks">
+                                    <span></span><span></span><span></span><span></span><span></span>
+                                    <span></span><span></span><span></span><span></span><span></span>
                                 </div>
 
-                                <!-- Right label -->
-                                <span style="width:70px; font-size:0.85rem;">Amazing</span>
+                                <div class="range-labels light">
+                                    <span>Poor (1)</span>
+                                    <span>(10) Excellent</span>
+                                </div>
                             </div>
                         </div>
 
+                        <!-- ATTENDANCE -->
                         <div class="col-12 col-lg-12">
                             <label class="form-label">How was the candidate's attendance record, punctuality, and overall timekeeping?</label>
-                            <div class="d-flex align-items-center gap-3">
-                                <!-- Left label -->
-                                <span style="width:70px; text-align:right; font-size:0.85rem;">Terrible</span>
+                            <div class="range-value-display" id="val_attendance">1</div>
 
-                                <!-- Slider + value -->
-                                <div class="flex-grow-1 d-flex align-items-center gap-2">
-                                    <input type="range" min="1" max="10" value="5"
-                                        class="form-range"
-                                        name="q_attendance"
-                                        oninput="syncRange(this)">
-                                    <output class="range-value">5</output>
+                            <div class="range-wrapper">
+                                <input type="range" min="1" max="10" value="1"
+                                    name="q_attendance"
+                                    oninput="syncRangeValue(this, 'val_attendance')">
+
+                                <div class="range-ticks">
+                                    <span></span><span></span><span></span><span></span><span></span>
+                                    <span></span><span></span><span></span><span></span><span></span>
                                 </div>
 
-                                <!-- Right label -->
-                                <span style="width:70px; font-size:0.85rem;">Amazing</span>
+                                <div class="range-labels light">
+                                    <span>Poor (1)</span>
+                                    <span>(10) Excellent</span>
+                                </div>
                             </div>
                         </div>
 
+                        <!-- SAFETY RECORD -->
                         <div class="col-12 col-lg-12">
                             <label class="form-label">Applicant's Safety Record?</label>
-                            <div class="d-flex align-items-center gap-3">
-                                <!-- Left label -->
-                                <span style="width:70px; text-align:right; font-size:0.85rem;">Terrible</span>
+                            <div class="range-value-display" id="val_safety">1</div>
 
-                                <!-- Slider + value -->
-                                <div class="flex-grow-1 d-flex align-items-center gap-2">
-                                    <input type="range" min="1" max="10" value="5"
-                                        class="form-range"
-                                        name="q_attenq_safetydance"
-                                        oninput="syncRange(this)">
-                                    <output class="range-value">5</output>
+                            <div class="range-wrapper">
+                                <input type="range" min="1" max="10" value="1"
+                                    name="q_safety"
+                                    oninput="syncRangeValue(this, 'val_safety')">
+
+                                <div class="range-ticks">
+                                    <span></span><span></span><span></span><span></span><span></span>
+                                    <span></span><span></span><span></span><span></span><span></span>
                                 </div>
 
-                                <!-- Right label -->
-                                <span style="width:70px; font-size:0.85rem;">Amazing</span>
+                                <div class="range-labels light">
+                                    <span>Poor (1)</span>
+                                    <span>(10) Excellent</span>
+                                </div>
                             </div>
                         </div>
-
                     </div>
+
 
                     <div class="row g-3 mt-3">
                         <div class="col-md-6">
@@ -323,6 +336,10 @@
                 yesRadio.addEventListener("change", updateVisibility);
                 noRadio.addEventListener("change", updateVisibility);
             });
+
+            function syncRangeValue(range, outputId) {
+                document.getElementById(outputId).innerText = range.value;
+            }
 
         </script>
     </body>
