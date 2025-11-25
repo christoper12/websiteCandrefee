@@ -17,11 +17,13 @@
     appearance: none;
     width: 20px;
     height: 20px;
-    background: #0d6efd;
+    /* background: #0d6efd; */
     border-radius: 50%;
     cursor: pointer;
     transition: .2s;
 }
+
+
 
 .range-wrapper input[type="range"]::-webkit-slider-thumb:hover {
     transform: scale(1.1);
@@ -30,7 +32,7 @@
 .range-value-display {
     width: 40px;
     height: 40px;
-    background: #0d6efd;
+    background: red;
     color: #fff;
     border-radius: 50%;
     display: flex;
@@ -64,4 +66,32 @@
     font-size: 0.85rem;
     margin-top: 6px;
     color: #555;
+}
+
+.colored-range {
+    width: 100%;
+    height: 6px;
+    border-radius: 5px;
+    appearance: none;
+    background: linear-gradient(90deg, #e63946 0%, #d3d3d3 0%);
+}
+
+/* Slider Thumb */
+.colored-range::-webkit-slider-thumb {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid #777;
+    cursor: pointer;
+}
+
+.colored-range::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid #777;
+    cursor: pointer;
 }

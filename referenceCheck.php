@@ -87,9 +87,9 @@
                             <div class="range-value-display" id="val_follow">1</div>
 
                             <div class="range-wrapper">
-                                <input type="range" min="1" max="10" value="1"
+                                <input type="range" min="1" max="10" value="1" class="colored-range"
                                     name="q_follow_instructions"
-                                    oninput="syncRangeValue(this, 'val_follow')">
+                                    oninput="syncRangeValue(this, 'val_follow'); updateSliderColor(this, 'val_follow');">
 
                                 <div class="range-ticks">
                                     <span></span><span></span><span></span><span></span><span></span>
@@ -97,8 +97,8 @@
                                 </div>
 
                                 <div class="range-labels light">
-                                    <span>Poor (1)</span>
-                                    <span>(10) Excellent</span>
+                                    <span style="color:red; font-weight:bold;">Poor (1)</span>
+                                    <span style="color:green; font-weight:bold;">Excellent (10)</span>
                                 </div>
                             </div>
                         </div>
@@ -109,9 +109,9 @@
                             <div class="range-value-display" id="val_independent">1</div>
 
                             <div class="range-wrapper">
-                                <input type="range" min="1" max="10" value="1"
+                                <input type="range" min="1" max="10" value="1" class="colored-range"
                                     name="q_work_independently"
-                                    oninput="syncRangeValue(this, 'val_independent')">
+                                    oninput="syncRangeValue(this, 'val_independent'); updateSliderColor(this, 'val_independent');">
 
                                 <div class="range-ticks">
                                     <span></span><span></span><span></span><span></span><span></span>
@@ -119,8 +119,8 @@
                                 </div>
 
                                 <div class="range-labels light">
-                                    <span>Poor (1)</span>
-                                    <span>(10) Excellent</span>
+                                    <span style="color:red; font-weight:bold;">Poor (1)</span>
+                                    <span style="color:green; font-weight:bold;">Excellent (10)</span>
                                 </div>
                             </div>
                         </div>
@@ -131,9 +131,9 @@
                             <div class="range-value-display" id="val_accuracy">1</div>
 
                             <div class="range-wrapper">
-                                <input type="range" min="1" max="10" value="1"
+                                <input type="range" min="1" max="10" value="1" class="colored-range"
                                     name="q_accuracy"
-                                    oninput="syncRangeValue(this, 'val_accuracy')">
+                                    oninput="syncRangeValue(this, 'val_accuracy'); updateSliderColor(this, 'val_accuracy');">
 
                                 <div class="range-ticks">
                                     <span></span><span></span><span></span><span></span><span></span>
@@ -141,8 +141,8 @@
                                 </div>
 
                                 <div class="range-labels light">
-                                    <span>Poor (1)</span>
-                                    <span>(10) Excellent</span>
+                                    <span style="color:red; font-weight:bold;">Poor (1)</span>
+                                    <span style="color:green; font-weight:bold;">Excellent (10)</span>
                                 </div>
                             </div>
                         </div>
@@ -153,9 +153,9 @@
                             <div class="range-value-display" id="val_attitude">1</div>
 
                             <div class="range-wrapper">
-                                <input type="range" min="1" max="10" value="1"
+                                <input type="range" min="1" max="10" value="1" class="colored-range"
                                     name="q_attitude"
-                                    oninput="syncRangeValue(this, 'val_attitude')">
+                                    oninput="syncRangeValue(this, 'val_attitude'); updateSliderColor(this, 'val_attitude');">
 
                                 <div class="range-ticks">
                                     <span></span><span></span><span></span><span></span><span></span>
@@ -163,8 +163,8 @@
                                 </div>
 
                                 <div class="range-labels light">
-                                    <span>Poor (1)</span>
-                                    <span>(10) Excellent</span>
+                                    <span style="color:red; font-weight:bold;">Poor (1)</span>
+                                    <span style="color:green; font-weight:bold;">Excellent (10)</span>
                                 </div>
                             </div>
                         </div>
@@ -175,9 +175,9 @@
                             <div class="range-value-display" id="val_attendance">1</div>
 
                             <div class="range-wrapper">
-                                <input type="range" min="1" max="10" value="1"
+                                <input type="range" min="1" max="10" value="1" class="colored-range"
                                     name="q_attendance"
-                                    oninput="syncRangeValue(this, 'val_attendance')">
+                                    oninput="syncRangeValue(this, 'val_attendance'); updateSliderColor(this, 'val_attendance');">
 
                                 <div class="range-ticks">
                                     <span></span><span></span><span></span><span></span><span></span>
@@ -185,21 +185,21 @@
                                 </div>
 
                                 <div class="range-labels light">
-                                    <span>Poor (1)</span>
-                                    <span>(10) Excellent</span>
+                                    <span style="color:red; font-weight:bold;">Poor (1)</span>
+                                    <span style="color:green; font-weight:bold;">Excellent (10)</span>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- SAFETY RECORD -->
+                        <!-- SAFETY -->
                         <div class="col-12 col-lg-12">
                             <label class="form-label">Applicant's Safety Record?</label>
                             <div class="range-value-display" id="val_safety">1</div>
 
                             <div class="range-wrapper">
-                                <input type="range" min="1" max="10" value="1"
+                                <input type="range" min="1" max="10" value="1" class="colored-range"
                                     name="q_safety"
-                                    oninput="syncRangeValue(this, 'val_safety')">
+                                    oninput="syncRangeValue(this, 'val_safety'); updateSliderColor(this, 'val_safety');">
 
                                 <div class="range-ticks">
                                     <span></span><span></span><span></span><span></span><span></span>
@@ -207,8 +207,8 @@
                                 </div>
 
                                 <div class="range-labels light">
-                                    <span>Poor (1)</span>
-                                    <span>(10) Excellent</span>
+                                    <span style="color:red; font-weight:bold;">Poor (1)</span>
+                                    <span style="color:green; font-weight:bold;">Excellent (10)</span>
                                 </div>
                             </div>
                         </div>
@@ -340,6 +340,28 @@
             function syncRangeValue(range, outputId) {
                 document.getElementById(outputId).innerText = range.value;
             }
+
+            function updateSliderColor(slider, targetId) {
+                const val = Number(slider.value);
+                const bubble = document.getElementById(targetId);
+
+                let color = "#e63946"; // merah
+
+                if (val >= 4 && val <= 6) color = "#ffba08";   // kuning
+                else if (val >= 7) color = "#4caf50";          // hijau
+
+                // --- Update slider warna ---
+                const percentage = ((val - 1) / 9) * 100;
+                slider.style.background =
+                    `linear-gradient(90deg, ${color} ${percentage}%, #d3d3d3 ${percentage}%)`;
+
+                // --- Anti-error: cek bubble dulu ---
+                if (bubble) {
+                    bubble.style.background = color;
+                    bubble.innerText = val;
+                }
+            }
+
 
         </script>
     </body>
