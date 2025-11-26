@@ -1,8 +1,83 @@
+<?php
+    $secretKey = 'alliedrec';
+
+    if (!isset($_GET['token'])) {
+        die("Token required");
+    }
+
+    $token = str_replace(array('-', '_'), array('+', '/'), $_GET['token']);
+    $token = urldecode($_GET['token']);
+    list($payloadB64, $signature) = explode('.', $token);
+
+    // Decode payload
+    $payloadJson = base64_decode($payloadB64);
+    //echo "Payload JSON: " . $payloadJson . "\n";
+    //echo "Signature from token: " . $signature . "\n";
+    $payload = json_decode($payloadJson, true);
+
+    
+    // Verify signature
+    // signature harus dihitung dari JSON payload asli
+    $signature = strtr($signature, '-_', '+/');
+    $pad = strlen($signature) % 4;
+    if ($pad) {
+        $signature .= str_repeat('=', 4 - $pad); // tambahkan padding
+    }
+
+    $expectedSignature = base64_encode(hash_hmac('sha256', $payloadJson, $secretKey, true));
+    //echo "Expected signature: " . $expectedSignature . "\n";
+    if (!hash_equals($expectedSignature, $signature)) {
+        die("Invalid token");
+    }
+
+    // Optional: check expiry
+    if (isset($payload['exp']) && time() > $payload['exp']) {
+        die("Token expired");
+    }
+
+    // Token valid
+    $refEmail = $payload['refEmail'];
+    $refName = $payload['refName'];
+    $refNumber = $payload['refNumber'];
+    $candno = $payload['candno'];
+    $candName = $payload['candName'];
+    $refTitle = $payload['refTitle'];
+
+
+    $refStartDate = $payload['refStartDate'];
+
+    // Parse the date with the correct format
+    $date = DateTime::createFromFormat('d/m/Y h:i:s A', $refStartDate);
+    $formattedDateRefStartDate = $date ? $date->format('d/m/Y') : 'Invalid date';
+
+    // Or if you want to handle errors more strictly
+    if ($date === false) {
+        throw new Exception("Invalid date format: " . $refStartDate);
+    }
+    $formattedDateRefStartDate = $date->format('Y-m-d');
+
+    $refEndDate = $payload['refEndDate'];
+
+    // Parse the date with the correct format
+    $date = DateTime::createFromFormat('d/m/Y h:i:s A', $refEndDate);
+    $formattedDateRefEndDate = $date ? $date->format('d/m/Y') : 'Invalid date';
+
+    // Or if you want to handle errors more strictly
+    if ($date === false) {
+        throw new Exception("Invalid date format: " . $refEndDate);
+    }
+    $formattedDateRefEndDate = $date->format('Y-m-d');
+
+    $refRole = $payload['refRole'];
+
+    //echo "Token valid: $candname - $uniqueid - $candno";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <?php include 'htmlhead.php'; ?>
-        <title>Reference Check Form</title>
+        <title>Reference Check Form <?php echo $candno." - ".$candName ?></title>
     </head>
 
     <body>
@@ -14,43 +89,45 @@
                 <h2><center>REFERENCE CHECK</center></h2>
 
                 <form id="refForm" novalidate>
+                    <input type="hidden" name="candno" id="candno" value="<?php echo $candno; ?>">
+                    
                     <!-- Candidate / Referee info (prefill from GET) -->
                     <div class="row g-3 mb-3">
                         <div class="col-md-6">
                             <label class="form-label">Referee's Name</label>
-                            <input name="referee_name" class="form-control cand-control" value="" readonly> 
+                            <input name="referee_name" id="refName" class="form-control cand-control" value="<?php echo $refName; ?>" readonly> 
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">Referee's Phone</label>
-                            <input name="referee_phone" class="form-control cand-control" value="" readonly>
+                            <input name="referee_phone" id="refNumber" class="form-control cand-control" value="<?php echo $refNumber; ?>" readonly>
                         </div>
 
                         <div class="col-md-6">
                             <label class="form-label">Referee's Email</label>
-                            <input name="referee_email" type="email" class="form-control cand-control" value="" readonly>
+                            <input name="referee_email" id="refEmail" type="email" class="form-control cand-control" value="<?php echo $refEmail; ?>" readonly>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">Referee's Title</label>
-                            <input name="referee_title" class="form-control cand-control" value="" readonly>
+                            <input name="referee_title" id="refTitle" class="form-control cand-control" value="<?php echo $refTitle; ?>" readonly>
                         </div>
 
                         <div class="col-md-12">
                             <label class="form-label">Applicant's Name</label>
-                            <input id="candidateName" name="candidate_name" class="form-control cand-control" value="" readonly>
+                            <input id="candidateName" id="candName" name="candidate_name" class="form-control cand-control" value="<?php echo $candName; ?>" readonly>
                         </div>
 
                         <div class="col-md-6">
                             <label class="form-label">Employed Dates (from)</label>
-                            <input name="employed_from" type="date" class="form-control cand-control" value="" readonly>
+                            <input name="employed_from" id="formattedDateRefStartDate" type="date" class="form-control cand-control" value="<?php echo $formattedDateRefStartDate; ?>" readonly>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">Employed Dates (to)</label>
-                            <input name="employed_to" type="date" class="form-control cand-control" value="" readonly>
+                            <input name="employed_to" id="formattedDateRefEndDate" type="date" class="form-control cand-control" value="<?php echo $formattedDateRefEndDate; ?>" readonly>
                         </div>
 
                         <div class="col-12">
                             <label class="form-label">Employed As</label>
-                            <input name="employed_as" class="form-control cand-control" value="" readonly>
+                            <input name="employed_as" id="refRole" class="form-control cand-control" value="<?php echo $refRole; ?>" readonly>
                         </div>
                     </div>
 
@@ -72,7 +149,7 @@
 
                     <div class="mb-4">
                         <label class="form-label">If the details are not correct, please let us know why</label>
-                        <textarea name="details_wrong_explain" class="form-control" rows="3" placeholder="Write here..."></textarea>
+                        <textarea name="details_wrong_explain" id="details_wrong_explain" class="form-control" rows="3" placeholder="Write here..."></textarea>
                     </div>
 
                     <hr>
@@ -237,7 +314,7 @@
                     </div>
 
                     <div class="d-grid mt-4">
-                        <button type="button" class="btn btn-primary d-flex justify-content-center align-items-center gap-2" onclick="submitRefForm(event)"><i class="bi bi-send-fill"></i> Submit Reference</button>
+                        <button type="button" class="btn btn-primary d-flex justify-content-center align-items-center gap-2" onclick="submitRefForm(event)"><i class="bi bi-send-fill"></i> Submit </button>
                     </div>
 
                     <p class="mt-4" style="font-size: 0.9rem; font-weight:bold;">By submitting this form, you confirm that all details provided are accurate and true to the best of your knowledge. You acknowledge that the information supplied will be used by Allied Recruitment to assess the candidate's suitability for employment.</p>
@@ -258,8 +335,90 @@
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
         <script src="js/script.js"></script>
+        <!-- SweetAlert2 JS -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
         <script>
+
+            // basic client-side validation + success behaviour
+            function submitRefForm(e) {
+                e.preventDefault();
+
+                const form = document.getElementById('refForm');
+
+                // Basic validation
+                if (!form.checkValidity()) {
+                    form.classList.add('was-validated');
+                    return;
+                }
+                form.classList.add('was-validated');
+
+                // Loading Animation
+                Swal.fire({
+                    title: "Submitting...",
+                    text: "Please wait",
+                    allowOutsideClick: false,
+                    didOpen: () => Swal.showLoading()
+                });
+
+                // Build final payload from all fields
+                let formData = {
+                    // ---------- Referee Information ----------
+                    referee_name: $("#refName").val(),
+                    referee_phone: $("#refNumber").val(),
+                    referee_email: $("#refEmail").val(),
+                    referee_title: $("#refTitle").val(),
+
+                    // ---------- Candidate Information ----------
+                    candno: $("#candno").val(),
+
+                    // ---------- Verification ----------
+                    details_correct: $("input[name='details_correct']:checked").val(),
+                    details_wrong_explain: $("#details_wrong_explain").val(),
+
+                    // ---------- Ratings ----------
+                    q_follow_instructions: $("input[name='q_follow_instructions']").val(),
+                    q_work_independently: $("input[name='q_work_independently']").val(),
+                    q_accuracy: $("input[name='q_accuracy']").val(),
+                    q_attitude: $("input[name='q_attitude']").val(),
+                    q_attendance: $("input[name='q_attendance']").val(),
+                    q_safety: $("input[name='q_safety']").val(),
+
+                    // ---------- Additional ----------
+                    consider_rehire: $("select[name='consider_rehire']").val(),
+                    reason_leaving: $("input[name='reason_leaving']").val(),
+                    other_comments: $("textarea[name='other_comments']").val()
+                };
+
+                // Send data to backend
+                $.ajax({
+                    url: "save_refereeCheck.php",
+                    method: "POST",
+                    data: { data: JSON.stringify(formData) },
+                    success: function (response) {
+
+                        Swal.fire({
+                            icon: "success",
+                            title: "Success!",
+                            text: "Your referee information has been submitted.",
+                            showConfirmButton: true
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        console.log("XHR:", xhr.responseText);
+                        console.log("STATUS:", status);
+                        console.log("ERROR:", error);
+
+                        Swal.fire({
+                            icon: "error",
+                            title: "Submission failed",
+                            text: xhr.responseText,
+                            showConfirmButton: true
+                        });
+                    }
+                });
+            }
+
             // populate candidate info from URL params
             (function populateFromUrl(){
                 const params = new URLSearchParams(window.location.search);
@@ -278,38 +437,6 @@
             // sync range output
             function syncRange(el){
                 const out = el.nextElementSibling; if(out) out.textContent = el.value;
-            }
-
-            // basic client-side validation + success behaviour
-            function submitRefForm(e){
-                const form = document.getElementById('refForm');
-                // use browser constraint validation
-                if(!form.checkValidity()){
-                    form.classList.add('was-validated');
-                    return;
-            }
-
-            // simulate sending: show alert
-            const alertEl = document.getElementById('successAlert');
-            alertEl.classList.add('show');
-            setTimeout(()=>alertEl.classList.remove('show'),3000);
-
-            // optionally: prepare payload and send to API here via fetch
-            // const payload = new FormData(form);
-            // fetch('https://your-api.example/api/referees', {method:'POST', body: payload})
-
-            form.reset();
-            // keep candidate fields after reset
-            populateFromUrl();
-            }
-
-            // expose populateFromUrl for re-use after reset
-            function populateFromUrl(){
-                const params = new URLSearchParams(window.location.search);
-                const name = params.get('num') || '';
-                const uid = params.get('uniqueid') || '';
-                if(name) document.getElementById('candidateName').value = decodeURIComponent(name);
-                if(uid) document.getElementById('candidateId').value = decodeURIComponent(uid);
             }
 
             // Show/hide explanation box based on Yes/No choice
@@ -361,8 +488,6 @@
                     bubble.innerText = val;
                 }
             }
-
-
         </script>
     </body>
 </html>
