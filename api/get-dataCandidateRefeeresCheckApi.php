@@ -54,12 +54,13 @@ $stmt = $conn->prepare("SELECT * FROM ti_candidaterefee_refeeformcheck WHERE can
 $stmt->bind_param("s", $id);
 $stmt->execute();
 
-$data = $stmt->get_result()->fetch_assoc();
+$result = $stmt->get_result();
+$data = $result->fetch_all(MYSQLI_ASSOC);
 
 // ================================
 // 4. Jika Data Tidak Ada
 // ================================
-if (!$data) {
+if (empty($data)) {
     echo json_encode([
         "status" => "error",
         "message" => "No record found for ID: $id",

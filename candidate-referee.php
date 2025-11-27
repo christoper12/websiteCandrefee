@@ -31,6 +31,10 @@
     }
 
     // Optional: check expiry
+    // Untuk melihat nilai exp dan waktu sekarang
+    // echo "Token expires: " . date('Y-m-d H:i:s', $payload['exp']) . "\n";
+    // echo "Current time: " . date('Y-m-d H:i:s', time()) . "\n";
+    
     if (isset($payload['exp']) && time() > $payload['exp']) {
         die("Token expired");
     }

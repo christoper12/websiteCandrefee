@@ -1,0 +1,8 @@
+RewriteEngine On
+RewriteBase /candidaterefee/
+
+# Jika file/folder tidak ada → lempar ke index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteRule ^(.+)$ index.php?code=$1 [L,QSA]

@@ -54,7 +54,8 @@ $stmt = $conn->prepare("SELECT * FROM ti_candidaterefee_candform WHERE dbcandno 
 $stmt->bind_param("s", $id);
 $stmt->execute();
 
-$data = $stmt->get_result()->fetch_assoc();
+$result = $stmt->get_result();
+$data = $result->fetch_all(MYSQLI_ASSOC);
 
 // ================================
 // 4. Jika Data Tidak Ada
