@@ -30,11 +30,11 @@ body {
 }
 
 :root{
-    --card-radius:14px
+    --card-radius:14px;
 }
     
 .rating-row .form-range{
-    height:8px
+    height:8px;
 }
 
 .cand-control {
@@ -54,3 +54,8 @@ body {
     min-width:992px){.container{max-width:980px}
 }
 
+.warning
+{
+    color:red;
+    font-size:12px;
+}

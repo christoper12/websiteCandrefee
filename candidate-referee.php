@@ -109,6 +109,7 @@
                         <div class="col-md-6">
                             <label class="form-label">Referee's email</label>
                             <input required class="form-control" type="email" id="r1_email"/>
+                            <span class="warning">* You must provide an official company email address for this referee. Personal domains (Gmail, Yahoo, etc.) are not accepted for verification.</span>
                         </div>
 
                         <div class="col-md-6">
@@ -158,6 +159,7 @@
                         <div class="col-md-6">
                             <label class="form-label">Referee's email</label>
                             <input required class="form-control" type="email" id="r2_email"/>
+                            <span class="warning">* You must provide an official company email address for this referee. Personal domains (Gmail, Yahoo, etc.) are not accepted for verification.</span>
                         </div>
 
                         <div class="col-md-6">
@@ -205,7 +207,8 @@
 
                         <div class="col-md-6">
                             <label class="form-label">Referee's email</label>
-                            <input class="form-control" type="email" id="r3_email"/>
+                            <input class="form-control" type="email" id="r3_email"/>.
+                            <span class="warning">* You must provide an official company email address for this referee. Personal domains (Gmail, Yahoo, etc.) are not accepted for verification.</span>
                         </div>
 
                         <div class="col-md-6">
